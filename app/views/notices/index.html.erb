@@ -1,0 +1,26 @@
+<p style="color: green"></p>
+<% content_for :title, "NOTICIAS" %>
+
+<div class="d-flex justify-content-between">
+<h1 class="my-5 text-center">NOTICIAS</h1>
+    <div>
+        <%= link_to "Agregar Noticia", new_notice_path, class:"btn btn-dark my-5" %>
+    </div>
+</div>
+
+<div class="row justify-content-between" >
+    <% @notices.each do |notice| %>
+      <div class="card col-5 mb-5">
+          <div class="text-center">
+          
+              <%= image_tag notice.image, class:"card-img-top w-50" %>
+           
+          </div>     
+          <div class="card-body">
+            <h5 class="card-title"><%= notice.title %></h5>
+            <p class="card-text"><%= notice.description.truncate(100) %></p>
+            <%= link_to "Ver", notice_path(notice), class:"btn btn-primary" %>
+          </div>
+      </div>
+    <% end %>
+</div>

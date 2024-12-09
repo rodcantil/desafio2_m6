@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<h1 class="my-5 text-center"><%= @notice.title %></h1>
+<div class="text-center">
+              <%= image_tag @notice.image, class:"card-img-top w-25" %>
+        <h5 class="mb-5 text-center my-4">Descripcion: <%= @notice.description %></h3>
+</div>
+<h2 class="my-5 text-center">Comentarios</h2>
+<div class="container">
+<% @comments.each do |comment| %>
+  <p>Usuario :<%= comment.user.name %></p>
+  <div>Comentario :<%= comment.content %></div>
+  <br>
+<% end %>
+</div>
+
+
+
+<div class="d-flex gap-2 my-5">
+  <%= link_to "Volver a Noticia", notices_path, class:"btn btn-dark" %>
+  <% if user_signed_in? %> 
+      <%= link_to "Nuevo Comentario", new_comment_path(@notice), class:"btn btn-dark" %>
+  <% end %>
+      
+  <% if current_user&.admin? %>    
+      <%= link_to "Editar esta Noticia", edit_notice_path(@notice), class:"btn btn-dark" %>
+      <%= button_to "Eliminar", @notice, class:"btn btn-danger btn-sm", method: :delete %>
+
+  <% end %>
+    
+    
+  </div>
